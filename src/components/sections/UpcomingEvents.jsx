@@ -2,7 +2,7 @@ import { MoveRight } from "lucide-react";
 import EventCard from "../ui/EventCard";
 import { Link } from "react-router";
 
-const UpcomingEvents = ({ upcomingEvents }) => {
+const UpcomingEvents = ({ upcomingEvents, loading }) => {
   return (
     <section className="max-w-6xl mx-auto py-10">
       <div className="flex items-center justify-between">
@@ -14,12 +14,19 @@ const UpcomingEvents = ({ upcomingEvents }) => {
           </span>
         </Link>
       </div>
-
-      <div className="grid grid-cols-4 gap-5 py-6">
-        {upcomingEvents?.map((event, index) => (
-          <EventCard key={index} event={event} />
-        ))}
-      </div>
+      {loading ? (
+        <div className="grid grid-cols-4 gap-5 py-6">
+          {Array.from({ length: 4 }).map((_, index) => (
+            <div key={index} className="h-[200px] bg-gray-200 rounded-lg"></div>
+          ))}
+        </div>
+      ) : (
+        <div className="grid grid-cols-4 gap-5 py-6">
+          {upcomingEvents?.map((event, index) => (
+            <EventCard key={index} event={event} />
+          ))}
+        </div>
+      )}
     </section>
   );
 };

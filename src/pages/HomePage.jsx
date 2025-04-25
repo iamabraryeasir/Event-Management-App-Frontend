@@ -9,18 +9,16 @@ const HomePage = () => {
 
   console.log(data);
 
-  // Render loading or error states
-  if (loading)
-    return <div className="text-center py-10">Loading events...</div>;
+  // Render error states
   if (error)
     return <div className="text-center py-10 text-red-500">{error}</div>;
 
   return (
     <>
       <HeroSection />
-      <FeaturedEvents featuredEvents={data?.featuredEvents} />
-      <CategorySection category={data?.categories} />
-      <UpcomingEvents upcomingEvents={data?.upcomingEvents} />
+      <FeaturedEvents loading={loading} featuredEvents={data?.featuredEvents} />
+      <CategorySection loading={loading} category={data?.categories} />
+      <UpcomingEvents loading={loading} upcomingEvents={data?.upcomingEvents} />
     </>
   );
 };
