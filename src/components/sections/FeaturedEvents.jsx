@@ -1,7 +1,7 @@
 import { MoveRight } from "lucide-react";
 import EventCard from "../ui/EventCard";
 
-const FeaturedEvents = () => {
+const FeaturedEvents = ({ featuredEvents }) => {
   return (
     <section className="max-w-6xl mx-auto py-10">
       <div className="flex items-center justify-between">
@@ -13,9 +13,9 @@ const FeaturedEvents = () => {
       </div>
 
       <div className="grid grid-cols-3 gap-12 py-6">
-        <EventCard />
-        <EventCard />
-        <EventCard />
+        {featuredEvents?.map((event) => (
+          <EventCard event={event} />
+        ))}
       </div>
     </section>
   );

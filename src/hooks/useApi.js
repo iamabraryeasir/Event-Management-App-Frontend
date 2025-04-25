@@ -1,41 +1,34 @@
-import { useState, useEffect, useCallback } from "react";
-import axios from "axios";
+import { useState, useEffect } from "react";
+import Client from "../utils/client";
 
-const api = axios.create({
-  baseURL: VITE_API_URL || "https://api.example.com",
-  headers: { "Content-Type": "application/json" },
-  timeout: 10000,
-});
-
-export function useApi(endpoint, options = {}) {
+export const useApi = (endpoint, options = {}) => {
   const { method = "get", body = null, deps = [] } = options;
-
   const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [loading, setLoading] = useState(false);
-
-  const callApi = useCallback(async () => {
-    setLoading(true);
-    setError(null);
-
-    try {
-      const config = {
-        method,
-        url: endpoint,
-        data: body,
-      };
-      const response = await api.request(config);
-      setData(response.data);
-    } catch (err) {
-      setError(err);
-    } finally {
-      setLoading(false);
-    }
-  }, [endpoint, method, body]);
 
   useEffect(() => {
-    callApi();
+    const fetchData = async () => {
+      try {
+        setLoading(true);
+        setError(null);
+
+        const response = await Client({
+          method,
+          url: endpoint,
+          ...(body && { data: body }),
+        });
+
+        setData(response.data.data);
+      } catch (err) {
+        setError(err.response?.data?.message || "An error occurred");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
   }, deps);
 
-  return { data, error, loading, refetch: callApi };
-}
+  return { data, loading, error };
+};
