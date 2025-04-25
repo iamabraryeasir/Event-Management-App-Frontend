@@ -13,8 +13,8 @@ const FeaturedEvents = ({ featuredEvents }) => {
       </div>
 
       <div className="grid grid-cols-3 gap-12 py-6">
-        {featuredEvents?.map((event) => (
-          <EventCard event={event} />
+        {featuredEvents?.map((event, index) => (
+          <EventCard key={index} event={event} />
         ))}
       </div>
     </section>

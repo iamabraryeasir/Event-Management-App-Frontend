@@ -3,7 +3,9 @@ import { Link, NavLink } from "react-router";
 const Navbar = () => {
   return (
     <nav className="max-w-6xl mx-auto flex justify-between items-center py-4">
-      <span className="text-2xl font-semibold text-primary">EventsPro</span>
+      <span className="text-2xl font-semibold text-primary">
+        <Link to="/">EventsPro</Link>
+      </span>
 
       <ul className="flex gap-x-4">
         <li>
