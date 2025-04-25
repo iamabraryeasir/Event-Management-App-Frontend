@@ -7,8 +7,6 @@ import UpcomingEvents from "../components/sections/UpcomingEvents.jsx";
 const HomePage = () => {
   const { data, loading, error } = useApi("/home-page");
 
-  console.log(data);
-
   // Render error states
   if (error)
     return <div className="text-center py-10 text-red-500">{error}</div>;
