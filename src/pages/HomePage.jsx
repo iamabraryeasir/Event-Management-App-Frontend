@@ -1,5 +1,6 @@
 import FeaturedEvents from "../components/sections/FeaturedEvents";
 import HeroSection from "../components/sections/HeroSection";
+import CategorySection from "../components/sections/CategorySection";
 import { useApi } from "../hooks/useApi.js";
 
 const HomePage = () => {
@@ -17,6 +18,7 @@ const HomePage = () => {
     <>
       <HeroSection />
       <FeaturedEvents featuredEvents={data?.featuredEvents} />
+      <CategorySection category={data?.categories} />
     </>
   );
 };

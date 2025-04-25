@@ -2,7 +2,7 @@ import { CalendarClock, MapPin } from "lucide-react";
 
 const EventCard = ({ event }) => {
   return (
-    <div className="rounded-lg overflow-hidden shadow-lg ">
+    <div className="rounded-lg overflow-hidden shadow-lg hover:-translate-y-1 transition-transform duration-150">
       <div className="relative h-[200px] overflow-hidden">
         <img
           src={event?.banner}
